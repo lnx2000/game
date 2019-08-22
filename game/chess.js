@@ -4,16 +4,22 @@ var ctx = canvas.getContext("2d");
 //var turn=document.getElementById("turn");
 //var wpointst=document.getElementById("wpoints");
 //var bpointst=document.getElementById("bpoints");
-var img=document.getElementById("black");
-var img1=document.getElementById("white");
-var img2=document.getElementById("big");
-var img3=document.getElementById("king");
+var img=document.getElementById("p0p");
+var img1=document.getElementById("p0b");
+var img2=document.getElementById("p1p");
+var img3=document.getElementById("p1b");
+var img4=document.getElementById("p2p");
+var img5=document.getElementById("p2b");
 let coX=null;
 let coY=null;
 let wpoints=0;
 let bpoints=0;
 let chance=1;
-ctx.fillStyle = "#000000";
+ctx.fillStyle = "#ffe900";
+
+// ctx1.fillStyle = "#e90000";
+//var st=document.getElementById("st");
+//var bt=document.getElementById("bt");
 
 var a=[[-1,-1,-1,-1,-1,-1,-1,-1],[-1,-1,-1,-1,-1,-1,-1,-1],[0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0],[1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,1]];
 document.addEventListener("DOMContentLoaded",onLoad);
@@ -93,6 +99,7 @@ function onClick()
 							coY=null;
 						}
 						drawBoard();
+						timer=10;
 				}
 				
 		}
@@ -137,6 +144,7 @@ function onClick()
 							coX=null;
 							coY=null;
 						}
+					
 						else if(a[coY][coX]===-2&&((xd===2&&yd===0)||(xd===0&&yd===2)||(xd===1&&yd===1))){
 						a[coY][coX]=0;
 						if(a[y1][x1]==1||a[y1][x1]==2||a[y1][x1]==3)
@@ -167,25 +175,17 @@ function onClick()
 								
 						}
 						drawBoard();
+						timer=10;
 					}
 			
 			}
-			console.log(wpoints);
-console.log(bpoints);
+		
 
 }
 
 
 
-function onLoad(){
 
-	drawBoard();
-    canvas.addEventListener("click", onClick);
-	
-	
-	
-
-}
 
 
 function drawBoard()
@@ -198,38 +198,50 @@ function drawBoard()
 		{
 				if((i+j)%2===0)
 				{
+					ctx.fillStyle = "#ffe900";
 					ctx.fillRect(j*100, i*100, 100, 100);
 					// ctx.drawImage(img, 10, 10);
 		
 				}
-	
+				else{
+					ctx.fillStyle = "#e90000";
+				ctx.fillRect(j*100, i*100, 100, 100);
+				}
 				if(a[i][j]===1)
 				{
-				ctx.drawImage(img1, j*100+10,i*100+10,80,80);
+				ctx.drawImage(img, j*100+10,i*100+10,80,80);
 	
 				}
 				else if(a[i][j]===-1)
 				{
-				ctx.drawImage(img, j*100, i*100,100,100);
+				ctx.drawImage(img1, j*100+10, i*100+10,80,80);
 				}
-				else if(a[i][j]===2||a[i][j]===-2)
+				else if(a[i][j]===2)
 				{
 				ctx.drawImage(img2, j*100, i*100,100,100);
 				}
-				else if(a[i][j]===3||a[i][j]===-3)
+				else if(a[i][j]===3)
+				{
+				ctx.drawImage(img4, j*100+10, i*100+10,80,80);
+				}
+				else if(a[i][j]===-3)
+				{
+				ctx.drawImage(img5, j*100+10, i*100+10,80,80);
+				}
+				else if(a[i][j]===-2)
 				{
 				ctx.drawImage(img3, j*100, i*100,100,100);
 				}
 		}
 	}
 	if(chance==1){
-		  document.getElementById("turn").innerHTML = "White's Turn";}
+		  document.getElementById("turn").innerHTML = "Pink's Turn";}
 		else
-		document.getElementById("turn").innerHTML = "Black's Turn";
+		document.getElementById("turn").innerHTML = "Blue's Turn";
 		//wpointst=wpoints;
 		//bpointst=bpoints;
-		document.getElementById("wpoints").innerHTML = wpoints;
-		document.getElementById("bpoints").innerHTML = bpoints;
+		document.getElementById("bpoints").innerHTML = wpoints;
+		document.getElementById("wpoints").innerHTML = bpoints;
 
 	
 }
@@ -269,6 +281,86 @@ function combine(coX,coY,l)
 
 		}
 }
+let tre1;
+var timer=9;
+function startTimer(){
+//var timer=duration,minutes,seconds;
+
+tre1=setInterval(function(){
+	//bt.innerHTML=timer;
+	document.getElementById("st").innerHTML = timer;
+	--timer;
+	if(timer<0){
+		chance=chance===1?-1:1;
+		drawBoard();
+		timer=9;
+	}
+	
+  }, 1000);
+
+
+
+
+}
+function stimer(){
+var timer=179,minute,seconds;
+minute=3
+seconds=0;
+var tre=setInterval(function(){
+	//bt.innerHTML=timer;
+	
+
+	if(seconds==0)
+	--minute;
+	seconds=timer%60;
+	
+	if(seconds<10)
+	document.getElementById("bt").innerHTML ="0"+minute+":0"+seconds;
+	else
+	document.getElementById("bt").innerHTML ="0"+minute+":"+seconds;
+	
+
+	--timer;
+	if(seconds<0)
+		--minute;
+	if(timer<0){
+		alert("time out");
+		clearInterval(tre);
+		clearInterval(tre1);
+		if(wpoints>bpoints){
+			alert("white wins");
+
+		}
+		else if(bpoints>wpoints){
+			alert("black wins");
+
+		}
+		else
+		alert("it's a tie");
+	}
+  }, 1000);
+
+
+
+
+}
+function onLoad(){
+
+	drawBoard();
+	
+	canvas.addEventListener("click", onClick);
+
+	
+	
+	
+
+}
+function start(){
+	stimer();
+	startTimer();
+}
+
+
 
 
 

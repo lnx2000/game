@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title> CHESS1 </title>
+    <title> Mingle Legion </title>
     <link rel="stylesheet" href="chess.css">
 </head>
 <body>
@@ -12,21 +12,34 @@
         <canvas id="myCanvas" width="800" height="800"
         style="border:1px solid #c3c3c3; ">
         </canvas>
-         <img style="display: none" id="black" src="black.png" >
-		 <img style="display: none" id="white" src="white.png">
-		 <img style="display: none" id="big" src="big.png">
-		 <img style="display: none" id="king" src="king.png" >
+         <img style="display: none" id="p0p" src="p0p.png" >
+		 <img style="display: none" id="p0b" src="p0b.png">
+		 <img style="display: none" id="p1p" src="p1p.png">
+		 <img style="display: none" id="p1b" src="p1b.png" >
+		 <img style="display: none" id="p2p" src="p2p.png">
+		 <img style="display: none" id="p2b" src="p2b.png" >
         <script type="text/javascript" src="chess.js" ></script>
-		<div style="margin-left:60%; margin-top:-700px;">
-		<h1 style="padding-bottom:100px;">CHESS</h1>
+		<div style="position: absolute; margin-left:50%; margin-top:-700px; ">
+		<h1 style="padding-bottom:100px;">Mingle Legion</h1>
 		
 		 <h1 style="font-size:40px;" id="turn"></h1>
+		 
          <h2>White pieces lost:</h2>
 		 <h3 id="wpoints"></h2>
 		<h2>Black pieces lost:</h2>
 		<h3 id="bpoints"></h2>
-		<h2 id="timer">rada</h2>
+		<h2 id="timer"></h2>
+		<h1>total Time:-</h1><h1 id="bt">03:00</h1>
 		
+		<h1>players time:-</h1><h1 id="st">10</h1>
+		 
+		<!-- <button onclick="start()"><h1>start</h1></button> -->
+		
+		</div>
+		<div style="margin-left:80%;">
+
+			<button onclick="start()" style="border-radius: 20%; " ><h1 style="margin: 15px; " >start</h1></button>
+
 		</div>
 	
 
